@@ -239,6 +239,47 @@ class _petSelectionScreenState extends State<petSelectionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.primaryColor,
+        elevation: 0,
+        title: Text("Pet Selection", style: TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold
+      ),
+        ),
+      ),
+      body: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.search, color: AppColors.primaryColor, ),
+                Expanded(
+                  child: TextField(
+                    controller: searchController,
+                    decoration: InputDecoration(
+                        hintText: "Search",
+                        border: InputBorder.none
+                    ),
+                  ),
+                ),
+                Icon(Icons.filter_list, color: AppColors.primaryColor,)
+              ],
+            ),
+          ),
+          SizedBox(height: 20,),
+          buildCategorySelection(),
+          SizedBox(height: 20,),
+          buildPetSelection(),
+        ],
+      ),
 
     );
   }
