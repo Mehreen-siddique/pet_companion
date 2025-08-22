@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_companion/Screens/DrawerScreen.dart';
-import 'package:pet_companion/Screens/HomeScreen.dart';
+import 'package:pet_companion/Screens/PetSelection.dart';
 
 class HomeContent extends StatefulWidget {
   const HomeContent({super.key});
@@ -17,7 +17,7 @@ class _HomeContentState extends State<HomeContent> {
         children: [
 
               Drawerscreen(),
-          Homescreen(),
+          petSelectionScreen()
 
         ],
       ),

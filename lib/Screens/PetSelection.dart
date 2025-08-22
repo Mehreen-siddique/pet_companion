@@ -15,6 +15,11 @@ class _petSelectionScreenState extends State<petSelectionScreen> {
   String selectedCategory = 'All';
   bool isMale = true;
 
+  double xOffSet = 0;
+  double yOffSet = 0;
+  double scaleFactor = 1;
+  bool isDrawerOpen = false;
+
 
 
   Widget buildCategorySelection(){
@@ -238,49 +243,83 @@ class _petSelectionScreenState extends State<petSelectionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
-        elevation: 0,
-        title: Text("Pet Selection", style: TextStyle(
-          color: Colors.white,
-          fontSize: 20,
-          fontWeight: FontWeight.bold
-      ),
-        ),
-      ),
-      body: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 20),
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
+    return
+      AnimatedContainer(duration: Duration(microseconds: 250),
+        transform: Matrix4.translationValues(xOffSet, yOffSet, 0)..scale(scaleFactor),
+
+        color: AppColors.background,
+        child: Column(
+          children: [
+            SizedBox(height: 40,),
+
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+
+              child: Row(
+                children: [
+                  isDrawerOpen ? IconButton(onPressed: (){
+                    setState(() {
+                      xOffSet= 0;
+                      yOffSet= 0;
+                      scaleFactor = 1;
+                      isDrawerOpen = false;
+                    });
+                  }, icon: Icon(Icons.arrow_back_ios)
+                  ):IconButton(onPressed: (){
+
+                    setState(() {
+                      xOffSet= 230;
+                      yOffSet= 150;
+                      scaleFactor = 0.6;
+                      isDrawerOpen = true;
+                    });
+                  }, icon:Icon(Icons.menu,
+                    color: AppColors.primaryColor,)
+                  ),
+                  SizedBox(width: 50,),
+                  Text("Pet Companion", style: TextStyle(
+                      color: AppColors.primaryText,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold
+
+                  ),)
+                ],
+              ),
             ),
-            child: Row(
-              children: [
-                Icon(Icons.search, color: AppColors.primaryColor, ),
-                Expanded(
-                  child: TextField(
-                    controller: searchController,
-                    decoration: InputDecoration(
-                        hintText: "Search",
-                        border: InputBorder.none
+            SizedBox(height: 20),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.search, color: AppColors.primaryColor, ),
+                  Expanded(
+                    child: TextField(
+                      controller: searchController,
+                      decoration: InputDecoration(
+                          hintText: "Search",
+                          border: InputBorder.none
+                      ),
                     ),
                   ),
-                ),
-                Icon(Icons.filter_list, color: AppColors.primaryColor,)
-              ],
+                  Icon(Icons.filter_list, color: AppColors.primaryColor,)
+                ],
+              ),
             ),
-          ),
-          SizedBox(height: 20,),
-          buildCategorySelection(),
-          SizedBox(height: 20,),
-          buildPetSelection(),
-        ],
-      ),
+            SizedBox(height: 20,),
+            buildCategorySelection(),
+            SizedBox(height: 20,),
+            buildPetSelection(),
 
-    );
+
+
+          ],
+        ),
+      );
   }
 }

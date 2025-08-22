@@ -252,7 +252,8 @@ bool isDrawerOpen = false;
 
   @override
   Widget build(BuildContext context) {
-    return  AnimatedContainer(duration: Duration(microseconds: 250),
+    return
+      AnimatedContainer(duration: Duration(microseconds: 250),
         transform: Matrix4.translationValues(xOffSet, yOffSet, 0)..scale(scaleFactor),
 
         color: AppColors.background,
