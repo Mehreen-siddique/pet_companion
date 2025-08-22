@@ -11,7 +11,88 @@ class petSelectionScreen extends StatefulWidget {
 
 class _petSelectionScreenState extends State<petSelectionScreen> {
 
+  final searchController = TextEditingController();
+  String selectedCategory = 'All';
+  bool isMale = true;
 
+
+
+  Widget buildCategorySelection(){
+    final categories = [
+      {'name': 'All', 'icon': Icons.all_inclusive_sharp,},
+      {'name': 'Cats', 'icon': FontAwesomeIcons.cat,},
+      {'name': 'Dogs', 'icon': FontAwesomeIcons.dog,},
+      {'name': 'Parrots', 'icon':FontAwesomeIcons.kiwiBird ,},
+      {'name': 'Rabbits', 'icon': FontAwesomeIcons.paw,},
+    ];
+    return Container(
+        height: 120,
+        padding: EdgeInsets.symmetric(vertical: 16.0),
+        child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: categories.length,
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            itemBuilder: (context, index) {
+              final category = categories[index];
+              final isSelected = selectedCategory == category['name'];
+              return Container(
+                margin: EdgeInsets.only(right: 12),
+                child:
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      selectedCategory = category['name'] as String;
+                    });
+
+                  },
+                  borderRadius: BorderRadius.circular(16),
+                  child: Container(
+                      width: 80,
+                      padding: EdgeInsets.all(12.0),
+                      decoration: BoxDecoration(
+                          color: isSelected ? AppColors.primaryColor : Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: isSelected ? Colors.transparent : AppColors.primaryColor,
+                            width: 2.0,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 3),
+                            ),
+
+                          ]
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            child: Icon(category['icon'] as IconData, color: isSelected ? Colors.white : AppColors.primaryColor,),
+                          ),
+                          SizedBox(height: 8.0),
+                          Text(
+                            category['name'] as String,
+                            style: TextStyle(
+                              color: isSelected ? Colors.white : AppColors.primaryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      )
+
+                  ),
+
+                ),
+
+              );
+
+
+            }
+        )
+    );
+  }
 
   Widget buildPetSelection(){
     final categories = [
