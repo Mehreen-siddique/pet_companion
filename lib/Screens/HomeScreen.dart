@@ -12,6 +12,10 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
+  final double health = 0.8;   // 80%
+  final double happiness = 0.6; // 60%
+  final double hunger = 0.3; // 30%
+
 
 
 
@@ -44,6 +48,49 @@ class _HomescreenState extends State<Homescreen> {
       ),
       body: Container(
         color: AppColors.background,
+        child: Column(
+          children: [
+            ClipRect(
+              child: Image.asset(
+                'images/Cat.png',
+                fit: BoxFit.cover,
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+child: Column(
+  children: [
+    Row(
+      children: [
+        Text("Happiness", style: TextStyle(
+          color: AppColors.primaryColor,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+
+        ),),
+        LinearProgressIndicator(
+          value: happiness,
+          backgroundColor: Colors.grey[300],
+          valueColor: AlwaysStoppedAnimation<Color>(AppColors.primaryColor),
+          minHeight: 10,
+          borderRadius: BorderRadius.circular(10),
+
+
+        )
+
+      ]
+
+    )
+  ],
+),
+            )
+          ],
+        ),
       ),
     );
   }

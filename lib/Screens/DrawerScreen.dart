@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_companion/Screens/HomeScreen.dart';
 import 'package:pet_companion/Utils/colorPalete.dart';
 
 class Drawerscreen extends StatefulWidget {
@@ -36,23 +37,28 @@ class _DrawerscreenState extends State<Drawerscreen> {
               ),
             ),
             SizedBox(height: 130,),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Homescreen(),));
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
 
-                children: [
-                  Icon(Icons.home,
-                    color: Colors.white,
-                    size: 22,
-                  ),
-                  SizedBox(width: 10,),
-                  Text("Home", style: TextStyle(
+                  children: [
+                    Icon(Icons.home,
                       color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold
-                  ),)
-                ],
+                      size: 22,
+                    ),
+                    SizedBox(width: 10,),
+                    Text("Home", style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold
+                    ),)
+                  ],
+                ),
               ),
             ),
             SizedBox(height: 10,),
