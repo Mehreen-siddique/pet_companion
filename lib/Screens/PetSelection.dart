@@ -115,120 +115,125 @@ class _petSelectionScreenState extends State<petSelectionScreen> {
             padding: EdgeInsets.symmetric(vertical: 16.0),
             itemBuilder: (context, index) {
               final category = categories[index];
-              return Container(
-                height: 240,
-                margin: EdgeInsets.symmetric(horizontal: 20),
+              return InkWell(
+                onTap: () {
+                  print("${category['name']}");
+                },
+                child: Container(
+                  height: 240,
+                  margin: EdgeInsets.symmetric(horizontal: 20),
 
-                child: Row(
-                  children: [
-                    Expanded(child:Stack(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 30),
+                  child: Row(
+                    children: [
+                      Expanded(child:Stack(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(top: 30),
 
-                          decoration: BoxDecoration(
-                              color: Colors.blueGrey[300],
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow:[
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(0, 3),
+                            decoration: BoxDecoration(
+                                color: Colors.blueGrey[300],
+                                borderRadius: BorderRadius.circular(20),
+                                boxShadow:[
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 2,
+                                    blurRadius: 5,
+                                    offset: Offset(0, 3),
+                                  ),
+                                ]
+
+                            ),
+                            child: Align(
+                              child: ClipRect(
+                                child: Image.asset(
+                                  category['image'] as String,
+                                  fit: BoxFit.cover,
                                 ),
-                              ]
-
-                          ),
-                          child: Align(
-                            child: ClipRect(
-                              child: Image.asset(
-                                category['image'] as String,
-                                fit: BoxFit.cover,
                               ),
                             ),
-                          ),
-                        )
-                      ],
-                    ) ),
-                    Expanded(
-                        child:Container(
+                          )
+                        ],
+                      ) ),
+                      Expanded(
+                          child:Container(
 
-                          margin: EdgeInsets.only(top: 60, bottom: 20),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20),
-                                bottomRight: Radius.circular(20),
-                              ),
-                              color: Colors.white,
-                              boxShadow:[
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(0, 3),
+                            margin: EdgeInsets.only(top: 60, bottom: 20),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(20),
+                                  bottomRight: Radius.circular(20),
                                 ),
-                              ]
-                          ),
-                          child: Container(
-                            padding: EdgeInsets.all(16.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                // Name + Gender
-                                Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        category['name']?.toString() ?? "",
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black87,
+                                color: Colors.white,
+                                boxShadow:[
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 2,
+                                    blurRadius: 5,
+                                    offset: Offset(0, 3),
+                                  ),
+                                ]
+                            ),
+                            child: Container(
+                              padding: EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  // Name + Gender
+                                  Container(
+                                    margin: EdgeInsets.symmetric(horizontal: 10),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          category['name']?.toString() ?? "",
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black87,
+                                          ),
                                         ),
-                                      ),
-                                      Icon(
-                                        (category['isMale'] == true)
-                                            ? FontAwesomeIcons.mars
-                                            : FontAwesomeIcons.venus,
-                                        size: 16,
-                                        color: Colors.grey[700],
+                                        Icon(
+                                          (category['isMale'] == true)
+                                              ? FontAwesomeIcons.mars
+                                              : FontAwesomeIcons.venus,
+                                          size: 16,
+                                          color: Colors.grey[700],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(height: 6),
+                                  Text(
+                                    category['breed']?.toString() ?? "Unknown Breed",
+                                    style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                                  ),
+                                  SizedBox(height: 6),
+                                  Text(
+                                    category['Age']?.toString() ?? "Unknown Age",
+                                    style: TextStyle(fontSize: 13, color: Colors.grey[500]),
+                                  ),
+                                  Spacer(),
+                                  // Distance
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(FontAwesomeIcons.locationDot,
+                                          size: 14, color: AppColors.primaryColor),
+                                      SizedBox(width: 6),
+                                      Text(
+                                        category['distance']?.toString() ?? "N/A",
+                                        style: TextStyle(fontSize: 13, color: Colors.grey[600]),
                                       ),
                                     ],
                                   ),
-                                ),
-                                SizedBox(height: 6),
-                                Text(
-                                  category['breed']?.toString() ?? "Unknown Breed",
-                                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
-                                ),
-                                SizedBox(height: 6),
-                                Text(
-                                  category['Age']?.toString() ?? "Unknown Age",
-                                  style: TextStyle(fontSize: 13, color: Colors.grey[500]),
-                                ),
-                                Spacer(),
-                                // Distance
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(FontAwesomeIcons.locationDot,
-                                        size: 14, color: AppColors.primaryColor),
-                                    SizedBox(width: 6),
-                                    Text(
-                                      category['distance']?.toString() ?? "N/A",
-                                      style: TextStyle(fontSize: 13, color: Colors.grey[600]),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
 
-                        )
-                    ),
-                  ],
+                          )
+                      ),
+                    ],
+                  ),
                 ),
               );
 
@@ -278,7 +283,7 @@ class _petSelectionScreenState extends State<petSelectionScreen> {
                     color: AppColors.primaryColor,)
                   ),
                   SizedBox(width: 50,),
-                  Text("Pet Companion", style: TextStyle(
+                  Text("Pet Selection", style: TextStyle(
                       color: AppColors.primaryText,
                       fontSize: 20,
                       fontWeight: FontWeight.bold
