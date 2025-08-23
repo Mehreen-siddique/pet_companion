@@ -101,10 +101,10 @@ class _petSelectionScreenState extends State<petSelectionScreen> {
 
   Widget buildPetSelection(){
     final categories = [
-      {'name': 'Sola','Age': '1.2 years','breed':'Abyssinian cat', 'distance':'3.5 KM' ,'isMale': true,'image': 'images/cat1.png'},
-      {'name': 'Dogs','Age': '5 months years','breed':'Abyssinian cat', 'distance':'3.5 KM' ,'isMale': false,'image': 'images/dog1.png' },
-      {'name': 'Parrots', 'Age': ' 2 months','breed':'Abyssinian cat', 'distance':'3.5 KM','isMale': false,'image': 'images/parrot1.png' },
-      {'name': 'Rabbits','Age': '1 years','breed':'Abyssinian cat', 'distance':'3.5 KM','isMale': false, 'image': 'images/rabbit1.png'},
+      {'name': 'Sola','Age': '1.2 years','breed':'Abyssinian cat', 'distance':'3.5 KM' ,'isMale': true,'image': 'images/ct.png'},
+      {'name': 'Dogs','Age': '5 months years','breed':'Abyssinian cat', 'distance':'3.5 KM' ,'isMale': false,'image': 'images/dg.png' },
+      {'name': 'Parrots', 'Age': ' 2 months','breed':'Abyssinian cat', 'distance':'3.5 KM','isMale': false,'image': 'images/bird.png' },
+      {'name': 'Rabbits','Age': '1 years','breed':'Abyssinian cat', 'distance':'3.5 KM','isMale': false, 'image': 'images/bunny.png'},
 
     ];
     return Container(

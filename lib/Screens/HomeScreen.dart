@@ -159,72 +159,84 @@ class _HomescreenState extends State<Homescreen> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
 
-              child: Row(
+              child:Column(
                 children: [
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                  SizedBox(
+                    height: 50,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+
                         ),
+                        onPressed: (){}, child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.set_meal, color: Colors.white,),
+                        SizedBox(width: 5,),
 
-                      ),
-                      onPressed: (){}, child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.set_meal, color: Colors.white,),
-                      SizedBox(width: 5,),
+                        Text("Feed", style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),),
+                      ],
+                    )),
+                  ),
 
-                      Text("Feed", style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),),
-                    ],
-                  )),
+                  SizedBox(height: 10),
+                  SizedBox(
+                    height: 50,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
 
-                  SizedBox(width: 5,),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
                         ),
+                        onPressed: (){}, child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.sports_esports, color: Colors.white,),
+                        SizedBox(width: 10,),
 
-                      ),
-                      onPressed: (){}, child: Row(
-                    children: [
-                      Icon(Icons.set_meal, color: Colors.white,),
-                      SizedBox(width: 10,),
+                        Text("Play", style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),),
+                      ],
+                    )),
+                  ),
+                  SizedBox(height: 10),
+                  SizedBox(
+                    height: 50,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
 
-                      Text("Feed", style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),),
-                    ],
-                  )),
-                  SizedBox(width: 10,),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
                         ),
+                        onPressed: (){}, child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.nightlight_round, color: Colors.white,),
+                        SizedBox(width: 10,),
 
-                      ),
-                      onPressed: (){}, child: Row(
-                    children: [
-                      Icon(Icons.set_meal, color: Colors.white,),
-                      SizedBox(width: 10,),
-
-                      Text("Feed", style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),),
-                    ],
-                  ))
+                        Text(
+                          "sleep", style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),),
+                      ],
+                    )),
+                  )
                 ],
               ),
             )
