@@ -55,6 +55,26 @@ Widget buildProgressBar(String label, double value, Color color){
 
   );
 }
+  Widget buildGameButton(IconData icon, String text) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color(0Xff37584D),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+      onPressed: () {},
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, color: Colors.white, size: 28),
+          const SizedBox(height: 5),
+          Text(text,
+              style: const TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.bold)),
+        ],
+      ),
+    );
+  }
 
 
   
@@ -173,6 +193,28 @@ Widget buildProgressBar(String label, double value, Color color){
             height: 200,
             fit: BoxFit.cover,
           ),
+        ),
+      ),
+      // Bottom Buttons
+      Container(
+        padding: const EdgeInsets.all(16),
+        margin: EdgeInsets.only(bottom: 40, left: 16, right: 16),
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.8), // semi-transparent
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+            bottomLeft: Radius.circular(30),
+            bottomRight: Radius.circular(30),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            buildGameButton(Icons.set_meal, "Feed"),
+            buildGameButton(Icons.sports_esports, "Play"),
+            buildGameButton(Icons.nightlight_round, "Sleep"),
+          ],
         ),
       ),
 
