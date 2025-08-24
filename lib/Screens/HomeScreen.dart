@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart' as dart_ui;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pet_companion/Utils/colorPalete.dart';
-
+import 'package:rive/rive.dart';
+import 'package:lottie/lottie.dart';
+import 'package:flutter/material.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -16,10 +19,42 @@ class _HomescreenState extends State<Homescreen> {
   final double happiness = 0.6; // 60%
   final double hunger = 0.3; // 30%
 
+  double progressValue = 0.5; // 50% filled
 
 
+Widget buildProgressBar(String label, double value, Color color){
+  return Container(
+    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+    decoration: BoxDecoration(
+      gradient: dart_ui.LinearGradient(
+        colors: [color.withOpacity(0.8), color],
+      ),
+      borderRadius: BorderRadius.circular(10),
+    ),
+      child: Row(
+      children: [
+        Text( label,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),),
+        const SizedBox(width: 10),
+        Expanded(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: LinearProgressIndicator(
+              value: value,
+              backgroundColor: Colors.white.withOpacity(0.3),
+              color: Colors.white,
+              minHeight: 10,
+            ),
+          ),
+        ),
+    ],
+  ),
 
-
+  );
+}
 
 
   
@@ -36,7 +71,7 @@ class _HomescreenState extends State<Homescreen> {
         title: Row(
           children: [
             Icon(Icons.home, color: Colors.white, size: 22,),
-            SizedBox(width: 110,),
+            SizedBox(width: 70,),
             Text("Home", style: TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -47,202 +82,106 @@ class _HomescreenState extends State<Homescreen> {
         backgroundColor: AppColors.primaryColor,
         centerTitle: true,
       ),
-      body:
-      SingleChildScrollView( // in case content overflows
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-
-            SizedBox(height: 20,),
-            // Pet Image
-            Container(
-              child: Image.asset(
-                'images/cat1.png',
-                fit: BoxFit.cover,
-              ),
+      body:  Stack(
+        children: [
+          Positioned.fill(
+            child: RiveAnimation.asset(
+              'assets/riv/background1.riv',
+              fit: BoxFit.cover, // ya contain / fitHeight try karo
+              alignment: Alignment.center,
             ),
+          ),
+    SafeArea(
+    child: Column(
+    children: [
+    // Top Progress Bars
+    Padding(
+    padding:  EdgeInsets.all(16.0),
+    child:  Container(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+      child: Column(
+        children: [
 
-            // Stats Container
-            Container(
-              margin: EdgeInsets.all(20),
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Icon(FontAwesomeIcons.smile, color: AppColors.primaryColor,),
-                      SizedBox(width: 10),
-                      Text(
-                        "Happiness",
-                        style: TextStyle(
-                          color: AppColors.primaryColor,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Expanded(
-                        child: LinearProgressIndicator(
-                          value: 0.7, // example value
-                          backgroundColor: Colors.grey[300],
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                              AppColors.primaryColor),
-                          minHeight: 10,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Icon(Icons.favorite, color: Colors.orange[200],),
-                      SizedBox(width: 10),
-                      Text(
-                        "Health",
-                        style: TextStyle(
-                          color: AppColors.primaryColor,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Expanded(
-                        child: LinearProgressIndicator(
-                          value:health, // example value
-                          backgroundColor: Colors.grey[300],
-                         valueColor: AlwaysStoppedAnimation<Color>(
-                              Colors.orange[200]!),
-                          minHeight: 10,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10),
+          buildProgressBar("❤️ Happiness",happiness, Colors.pink),
+          const SizedBox(height: 10),
+          buildProgressBar("🍖 Hunger", hunger, Colors.orange),
+          const SizedBox(height: 10),
+          buildProgressBar("💪 Health", health, Colors.green),
+        ],
+      ) ,
+    ),
 
-                  Row(
-                    children: [
-                      Icon(Icons.set_meal, color: Colors.red[200],),
-                      SizedBox(width: 10),
 
-                      Text(
-                        "Hunger",
-                        style: TextStyle(
-                          color: AppColors.primaryColor,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Expanded(
-                        child: LinearProgressIndicator(
-                          value: hunger, // example value
-                          backgroundColor: Colors.grey[300],
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                              Colors.red[200]!),
-                          minHeight: 10,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    ],
-                  ),
-
-                ],
-              ),
-            ),
-            SizedBox(height: 10),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-
-              child:Column(
-                children: [
-                  SizedBox(
-                    height: 50,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primaryColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-
-                        ),
-                        onPressed: (){}, child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.set_meal, color: Colors.white,),
-                        SizedBox(width: 5,),
-
-                        Text("Feed", style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),),
-                      ],
-                    )),
-                  ),
-
-                  SizedBox(height: 10),
-                  SizedBox(
-                    height: 50,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primaryColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-
-                        ),
-                        onPressed: (){}, child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.sports_esports, color: Colors.white,),
-                        SizedBox(width: 10,),
-
-                        Text("Play", style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),),
-                      ],
-                    )),
-                  ),
-                  SizedBox(height: 10),
-                  SizedBox(
-                    height: 50,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primaryColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-
-                        ),
-                        onPressed: (){}, child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.nightlight_round, color: Colors.white,),
-                        SizedBox(width: 10,),
-
-                        Text(
-                          "sleep", style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),),
-                      ],
-                    )),
-                  )
-                ],
-              ),
-            )
-          ],
+//       SafeArea(
+//           child: (
+// Column(
+//         children: [
+//
+//           Padding(
+//             padding:  EdgeInsets.all(16.0),
+//             child:
+//             Column(
+//
+//               children: [
+//                 buildProgressBar("❤️ Happiness", happiness, Colors.pink),
+//                 SizedBox(height: 10),
+//                 buildProgressBar("🍖 Hunger", hunger, Colors.orange),
+//                 SizedBox(height: 10),
+//                 buildProgressBar("💪 Health", health, Colors.green),
+//               ],
+//             ),
+//           ),
+//           Expanded(
+//             child: Center(
+//               child:Container(
+//                 height: double.infinity,
+//                   width: double.infinity,
+//                   child: Stack(
+//                     children: [
+//                       RiveAnimation.asset('assets/riv/background1.riv'),
+//                       Positioned(
+//
+//                         child: Lottie.asset(
+//                           'assets/lottie/cat1.json',
+//                           width: 200,
+//                           height: 200,
+//                           fit: BoxFit.cover,
+//                         ),
+//                       ),
+//                     ],
+//                   )
+//
+//               ),
+//
+//             ),
+//           ),
+//
+//
+//         ],
+//       )),
+//       )
+    ),
+      Expanded(
+        child: Center(
+          child: Lottie.asset(
+            'assets/lottie/cat1.json',
+            width: 200,
+            height: 200,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
+
+    ]
+    ),
+    ),
+    ]
+      )
+
     );
   }
 }
