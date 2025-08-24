@@ -87,21 +87,21 @@ Widget buildProgressBar(String label, double value, Color color){
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          children: [
-            Icon(Icons.home, color: Colors.white, size: 22,),
-            SizedBox(width: 70,),
-            Text("Home", style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),),
-          ],
-        ),
-        backgroundColor: AppColors.primaryColor,
-        centerTitle: true,
-      ),
+      // appBar: AppBar(
+      //   title: Row(
+      //     children: [
+      //       Icon(Icons.home, color: Colors.white, size: 22,),
+      //       SizedBox(width: 70,),
+      //       Text("Home", style: TextStyle(
+      //         color: Colors.white,
+      //         fontSize: 20,
+      //         fontWeight: FontWeight.bold,
+      //       ),),
+      //     ],
+      //   ),
+      //   backgroundColor: AppColors.primaryColor,
+      //   centerTitle: true,
+      // ),
       body:  Stack(
         children: [
           Positioned.fill(
@@ -134,56 +134,6 @@ Widget buildProgressBar(String label, double value, Color color){
         ],
       ) ,
     ),
-
-
-//       SafeArea(
-//           child: (
-// Column(
-//         children: [
-//
-//           Padding(
-//             padding:  EdgeInsets.all(16.0),
-//             child:
-//             Column(
-//
-//               children: [
-//                 buildProgressBar("❤️ Happiness", happiness, Colors.pink),
-//                 SizedBox(height: 10),
-//                 buildProgressBar("🍖 Hunger", hunger, Colors.orange),
-//                 SizedBox(height: 10),
-//                 buildProgressBar("💪 Health", health, Colors.green),
-//               ],
-//             ),
-//           ),
-//           Expanded(
-//             child: Center(
-//               child:Container(
-//                 height: double.infinity,
-//                   width: double.infinity,
-//                   child: Stack(
-//                     children: [
-//                       RiveAnimation.asset('assets/riv/background1.riv'),
-//                       Positioned(
-//
-//                         child: Lottie.asset(
-//                           'assets/lottie/cat1.json',
-//                           width: 200,
-//                           height: 200,
-//                           fit: BoxFit.cover,
-//                         ),
-//                       ),
-//                     ],
-//                   )
-//
-//               ),
-//
-//             ),
-//           ),
-//
-//
-//         ],
-//       )),
-//       )
     ),
       Expanded(
         child: Center(
