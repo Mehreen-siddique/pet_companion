@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/cupertino.dart' as dart_ui;
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:percent_indicator/percent_indicator.dart';
+import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
+import 'package:pet_companion/Utils/colorPalete.dart';
 
 
 class Homescreen extends StatefulWidget {
@@ -12,65 +16,83 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
-  final double health = 0.8;   // 80%
+  final double sleep = 0.8;   // 80%
   final double happiness = 0.6; // 60%
   final double hunger = 0.3; // 30%
-  
+  final double game = 0.2; // 20%
 
 
-Widget buildProgressBar(String label, double value, Color color){
-  return Container(
-    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-    decoration: BoxDecoration(
-      gradient: dart_ui.LinearGradient(
-        colors: [color.withOpacity(0.8), color],
-      ),
-      borderRadius: BorderRadius.circular(10),
-    ),
-      child: Row(
+
+
+
+
+  Widget buildLiquidStat(String label, double percent, Color color, IconData icon) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Text( label,
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),),
-        const SizedBox(width: 10),
-        Expanded(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: LinearProgressIndicator(
-              value: value,
-              backgroundColor: Colors.white.withOpacity(0.3),
-              color: Colors.white,
-              minHeight: 10,
+        Container(
+          width: 60,
+          height: 60,
+          child: LiquidCircularProgressIndicator(
+            value: percent,
+            // 0.0 - 1.0
+            valueColor: AlwaysStoppedAnimation(color),
+            backgroundColor: Colors.white,
+            borderColor: Colors.black,
+            borderWidth: 2.0,
+            direction: Axis.vertical,
+            center: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  icon,
+                  color: Colors.black87, // 👈 now visible on light liquid
+                  size: 26,
+                  shadows: [
+                    Shadow(
+                      color: Colors.white.withOpacity(0.6),
+                      blurRadius: 6,
+                    )
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  "${(percent * 100).toInt()}%",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                    shadows: [
+                      Shadow(
+                        color: Colors.white,
+                        offset: Offset(1, 1),
+                        blurRadius: 2,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ),
-    ],
-  ),
-
-  );
-}
-  Widget buildGameButton(IconData icon, String text) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0Xff37584D),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      ),
-      onPressed: () {},
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, color: Colors.white, size: 28),
-          const SizedBox(height: 5),
-          Text(text,
-              style: const TextStyle(
-                  color: Colors.white, fontWeight: FontWeight.bold)),
-        ],
-      ),
+        const SizedBox(height: 8),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
+          ),
+        )
+      ],
     );
   }
+
+  
+
+
+
+
 
 
   
@@ -83,21 +105,6 @@ Widget buildProgressBar(String label, double value, Color color){
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Row(
-      //     children: [
-      //       Icon(Icons.home, color: Colors.white, size: 22,),
-      //       SizedBox(width: 70,),
-      //       Text("Home", style: TextStyle(
-      //         color: Colors.white,
-      //         fontSize: 20,
-      //         fontWeight: FontWeight.bold,
-      //       ),),
-      //     ],
-      //   ),
-      //   backgroundColor: AppColors.primaryColor,
-      //   centerTitle: true,
-      // ),
       body:  Stack(
         children: [
 
@@ -107,37 +114,17 @@ Widget buildProgressBar(String label, double value, Color color){
               (image:
             AssetImage('images/bc.png'
                 ),
-              fit: BoxFit.cover,   // fills screen, keeps ratio
+              fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
             ),),
 
     SafeArea(
-    child: Column(
+    child:
+    Column(
     children: [
     // Top Progress Bars
-
-    Padding(
-    padding:  EdgeInsets.all(16.0),
-    child:  Container(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-        ),
-      child: Column(
-        children: [
-
-          buildProgressBar("❤️ Happiness",happiness, Colors.pink),
-          const SizedBox(height: 10),
-          buildProgressBar("🍖 Hunger", hunger, Colors.orange),
-          const SizedBox(height: 10),
-          buildProgressBar("💪 Health", health, Colors.green),
-        ],
-      ) ,
-    ),
-    ),
-      SizedBox(height: 290,),
+      SizedBox(height: 490,),
       Expanded(
         child: Center(
           child: Lottie.asset(
@@ -151,20 +138,15 @@ Widget buildProgressBar(String label, double value, Color color){
 
       // Bottom Buttons
       Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.8), // semi-transparent
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
-          ),
-        ),
+        padding: EdgeInsets.all(16),
+
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            buildGameButton(Icons.set_meal, "Feed"),
-            buildGameButton(Icons.sports_esports, "Play"),
-            buildGameButton(Icons.nightlight_round, "Sleep"),
+            buildLiquidStat("Happy", happiness, Colors.teal, Icons.emoji_emotions),
+            buildLiquidStat("Hungry", hunger, Colors.orange, Icons.fastfood),
+            buildLiquidStat("Sleep", sleep, Colors.pink.shade200, Icons.bedtime),
+            buildLiquidStat("Game", game, Colors.red.shade400, Icons.sports_esports),
           ],
         ),
       ),
