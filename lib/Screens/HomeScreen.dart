@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/cupertino.dart' as dart_ui;
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:pet_companion/Utils/colorPalete.dart';
-import 'package:rive/rive.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter/material.dart';
+
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -18,8 +15,7 @@ class _HomescreenState extends State<Homescreen> {
   final double health = 0.8;   // 80%
   final double happiness = 0.6; // 60%
   final double hunger = 0.3; // 30%
-
-  double progressValue = 0.5; // 50% filled
+  
 
 
 Widget buildProgressBar(String label, double value, Color color){
@@ -104,17 +100,23 @@ Widget buildProgressBar(String label, double value, Color color){
       // ),
       body:  Stack(
         children: [
+
           Positioned.fill(
-            child: RiveAnimation.asset(
-              'assets/riv/background1.riv',
-              fit: BoxFit.cover, // ya contain / fitHeight try karo
-              alignment: Alignment.center,
-            ),
-          ),
+            child: Image
+
+              (image:
+            AssetImage('images/bc.png'
+                ),
+              fit: BoxFit.cover,   // fills screen, keeps ratio
+              width: double.infinity,
+              height: double.infinity,
+            ),),
+
     SafeArea(
     child: Column(
     children: [
     // Top Progress Bars
+
     Padding(
     padding:  EdgeInsets.all(16.0),
     child:  Container(
@@ -135,6 +137,7 @@ Widget buildProgressBar(String label, double value, Color color){
       ) ,
     ),
     ),
+      SizedBox(height: 290,),
       Expanded(
         child: Center(
           child: Lottie.asset(
@@ -145,17 +148,15 @@ Widget buildProgressBar(String label, double value, Color color){
           ),
         ),
       ),
+
       // Bottom Buttons
       Container(
         padding: const EdgeInsets.all(16),
-        margin: EdgeInsets.only(bottom: 40, left: 16, right: 16),
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.8), // semi-transparent
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(30),
             topRight: Radius.circular(30),
-            bottomLeft: Radius.circular(30),
-            bottomRight: Radius.circular(30),
           ),
         ),
         child: Row(

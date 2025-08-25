@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_companion/Screens/HomeScreen.dart';
 import 'package:pet_companion/Utils/colorPalete.dart';
 
@@ -10,176 +11,114 @@ class Drawerscreen extends StatefulWidget {
 }
 
 class _DrawerscreenState extends State<Drawerscreen> {
+
+
+  Widget buildMenuItem({
+    required IconData icon,
+    required String text,
+    VoidCallback? onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 6),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Row(
+          children: [
+            Icon(icon, color: Colors.white, size: 24),
+            const SizedBox(width: 12),
+            Text(
+              text,
+              style: GoogleFonts.bungee(
+                fontSize: 18,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildBottomAction(IconData icon, String text) {
+    return Row(
+      children: [
+        Icon(icon, color: Colors.white, size: 22),
+        const SizedBox(width: 6),
+        Text(
+          text,
+          style: GoogleFonts.bungee(
+            fontSize: 16,
+            color: Colors.white,
+          ),
+        ),
+      ],
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.primaryColor,
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 70),
-        margin: EdgeInsets.symmetric(horizontal: 10),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            AppColors.primaryColor, // teal green main
+           AppColors.secondaryColor, // lighter teal/green
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      child: Padding(padding: EdgeInsets.symmetric(horizontal: 15, vertical: 60),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10,),
-              margin: EdgeInsets.symmetric(horizontal: 10),
+            Center(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.pets, color: Colors.white,),
-                  SizedBox(width: 10,),
-                  Text("Pet Companion", style: TextStyle(
+                  const Icon(Icons.pets, color: Colors.white, size: 30),
+                  const SizedBox(width: 8),
+                  Text(
+                    "Pet Companion",
+                    style: GoogleFonts.bungee(
+                      fontSize: 24,
                       color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold
-                  ),)
-                ],
-              ),
-            ),
-            SizedBox(height: 130,),
-            GestureDetector(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Homescreen(),));
-              },
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-
-                  children: [
-                    Icon(Icons.home,
-                      color: Colors.white,
-                      size: 22,
                     ),
-                    SizedBox(width: 10,),
-                    Text("Home", style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold
-                    ),)
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 10,),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-
-                children: [
-                  Icon(Icons.favorite,
-                    color: Colors.white,
-                    size: 22,
                   ),
-                  SizedBox(width: 10,),
-                  Text("pet stats", style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold
-                  ),)
                 ],
               ),
             ),
-            SizedBox(height: 10,),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-
-                children: [
-                  Icon(Icons.volunteer_activism,
-                    color: Colors.white,
-                    size: 22,
-                  ),
-                  SizedBox(width: 10,),
-                  Text("Care Actions", style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold
-                  ),)
-                ],
-              ),
+            SizedBox(height: 80,),
+            buildMenuItem(
+              icon: Icons.home,
+              text: "Home",
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const Homescreen()));
+              },
             ),
-            SizedBox(height: 10,),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
+            buildMenuItem(icon: Icons.favorite, text: "Pet Stats"),
+            buildMenuItem(icon: Icons.volunteer_activism, text: "Care Actions"),
+            buildMenuItem(icon: Icons.catching_pokemon, text: "Pet Selection"),
+            buildMenuItem(icon: Icons.settings, text: "Settings"),
 
-                children: [
-                  Icon(Icons.catching_pokemon,
-                    color: Colors.white,
-                    size: 22,
-                  ),
-                  SizedBox(width: 10,),
-                  Text("Pet Selection", style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold
-                  ),)
-                ],
-              ),
-            ),
-            SizedBox(height: 10,),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
+            const Spacer(),
 
-                children: [
-                  Icon(Icons.settings,
-                    color: Colors.white,
-                    size: 22,
-                  ),
-                  SizedBox(width: 10,),
-                  Text("Settings", style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold
-                  ),)
-                ],
-              ),
-            ),
-            SizedBox(height: 180,),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              child:
-              Row(
-
-                children: [
-                  Icon(Icons.info_outline,
-                    color: Colors.white,
-                    size: 22,
-                  ),
-                  SizedBox(width: 10,),
-
-                  Text("About", style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold
-                  ),),
-                  SizedBox(width: 20,),
-                  Container(
-                    width: 1,          // line thickness
-                    height: 20,        // line length
-                    color: Colors.white70, // line color
-                  ),
-                  SizedBox(width: 20,),
-                  Icon(Icons.logout,
-                    color: Colors.white,
-                    size: 22,
-                  ),
-                  SizedBox(width: 10,),
-                  Text("Logout", style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold
-                  ),),
-                ],
-              ),
-            ),
+            // Bottom Row
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                buildBottomAction(Icons.info_outline, "About"),
+                Container(width: 1, height: 20, color: Colors.white70),
+                buildBottomAction(Icons.logout, "Logout"),
+              ],
+            )
 
 
 

@@ -37,6 +37,7 @@ dependencies:
   font_awesome_flutter: ^10.9.1
   rive: ^0.13.20
   lottie: ^3.3.1
+  google_fonts: ^6.3.0
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +71,7 @@ flutter:
     - assets/riv/cat_dog.riv
     - assets/riv/cat_01.riv
     - assets/riv/background1.riv
+    - assets/riv/background2.riv
     - assets/lottie/cat1.json
     - assets/lottie/bg.json
     - assets/lottie/bunny1.json
