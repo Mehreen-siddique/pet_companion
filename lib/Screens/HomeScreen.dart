@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
+import 'package:pet_companion/Screens/SleepScreen.dart';
 import 'package:pet_companion/Utils/colorPalete.dart';
 
 
@@ -145,7 +146,11 @@ class _HomescreenState extends State<Homescreen> {
           children: [
             buildLiquidStat("Happy", happiness, Colors.teal, Icons.emoji_emotions),
             buildLiquidStat("Hungry", hunger, Colors.orange, Icons.fastfood),
-            buildLiquidStat("Sleep", sleep, Colors.pink.shade200, Icons.bedtime),
+            InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Sleepscreen()));
+              },
+                child: buildLiquidStat("Sleep", sleep, Colors.pink.shade200, Icons.bedtime)),
             buildLiquidStat("Game", game, Colors.red.shade400, Icons.sports_esports),
           ],
         ),
