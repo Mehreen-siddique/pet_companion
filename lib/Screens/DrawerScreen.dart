@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_companion/Screens/HomeScreen.dart';
+import 'package:pet_companion/Screens/SettingsScreen.dart';
 import 'package:pet_companion/Utils/colorPalete.dart';
 
 class Drawerscreen extends StatefulWidget {
@@ -106,7 +107,13 @@ class _DrawerscreenState extends State<Drawerscreen> {
             buildMenuItem(icon: Icons.favorite, text: "Pet Stats"),
             buildMenuItem(icon: Icons.volunteer_activism, text: "Care Actions"),
             buildMenuItem(icon: Icons.catching_pokemon, text: "Pet Selection"),
-            buildMenuItem(icon: Icons.settings, text: "Settings"),
+            buildMenuItem(icon: Icons.settings, text: "Settings",
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const SettingsScreen()));
+              }
+
+            ),
 
             const Spacer(),
 
