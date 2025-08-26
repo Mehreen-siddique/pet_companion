@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../Utils/colorPalete.dart' show AppColors;
+
 class Sleepscreen extends StatefulWidget {
   const Sleepscreen({super.key});
 
@@ -38,6 +40,25 @@ class _SleepscreenState extends State<Sleepscreen> with SingleTickerProviderStat
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.teal[700], // Match your green theme
+        leading: IconButton(
+          icon: const Icon(Icons.home, color: Colors.white),
+          onPressed: () {
+            // Navigate to Home screen
+            Navigator.pop(context);
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings, color: Colors.white),
+            onPressed: () {
+              // Navigate to Settings screen
+              // Add your settings navigation logic here
+            },
+          ),
+        ],
+      ),
       body: Stack(
         children: [
           // Background image
@@ -49,7 +70,7 @@ class _SleepscreenState extends State<Sleepscreen> with SingleTickerProviderStat
           ),
           // Sleeping pet with breathing animation
           Positioned(
-            top: 400,
+            top: 350,
             left: 130, // Adjusted for centering
             child: AnimatedBuilder(
               animation: _controller!,
@@ -67,7 +88,7 @@ class _SleepscreenState extends State<Sleepscreen> with SingleTickerProviderStat
           ),
           // Floating ZZZ animation
           Positioned(
-            top: 400,
+            top: 350,
             left: 160, // Above Kitty's head
             child: AnimatedBuilder(
               animation: _controller!,
@@ -80,7 +101,7 @@ class _SleepscreenState extends State<Sleepscreen> with SingleTickerProviderStat
                       'ZZZ',
                       style: TextStyle(
                         fontSize: 24,
-                        color: Colors.white,
+                        color: AppColors.primaryText,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart' as dart_ui;
+
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:lottie/lottie.dart';
-import 'package:percent_indicator/percent_indicator.dart';
+
 import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
 import 'package:pet_companion/Screens/SleepScreen.dart';
-import 'package:pet_companion/Utils/colorPalete.dart';
+
 
 
 class Homescreen extends StatefulWidget {
@@ -17,17 +17,13 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
-  final double sleep = 0.8;   // 80%
-  final double happiness = 0.6; // 60%
-  final double hunger = 0.3; // 30%
-  final double game = 0.2; // 20%
 
 
 
 
 
 
-  Widget buildLiquidStat(String label, double percent, Color color, IconData icon) {
+  Widget buildLiquidStat( Color color, IconData icon) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -35,7 +31,6 @@ class _HomescreenState extends State<Homescreen> {
           width: 60,
           height: 60,
           child: LiquidCircularProgressIndicator(
-            value: percent,
             // 0.0 - 1.0
             valueColor: AlwaysStoppedAnimation(color),
             backgroundColor: Colors.white,
@@ -56,35 +51,11 @@ class _HomescreenState extends State<Homescreen> {
                     )
                   ],
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  "${(percent * 100).toInt()}%",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                    shadows: [
-                      Shadow(
-                        color: Colors.white,
-                        offset: Offset(1, 1),
-                        blurRadius: 2,
-                      ),
-                    ],
-                  ),
-                ),
               ],
             ),
           ),
         ),
-        const SizedBox(height: 8),
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-            color: Colors.black,
-          ),
-        )
+
       ],
     );
   }
@@ -144,14 +115,14 @@ class _HomescreenState extends State<Homescreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            buildLiquidStat("Happy", happiness, Colors.teal, Icons.emoji_emotions),
-            buildLiquidStat("Hungry", hunger, Colors.orange, Icons.fastfood),
+            buildLiquidStat(  Colors.teal, Icons.emoji_emotions),
+            buildLiquidStat(  Colors.orange, Icons.fastfood),
             InkWell(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Sleepscreen()));
               },
-                child: buildLiquidStat("Sleep", sleep, Colors.pink.shade200, Icons.bedtime)),
-            buildLiquidStat("Game", game, Colors.red.shade400, Icons.sports_esports),
+                child: buildLiquidStat(  Colors.pink.shade200, Icons.bedtime)),
+            buildLiquidStat( Colors.red.shade400, Icons.sports_esports),
           ],
         ),
       ),
