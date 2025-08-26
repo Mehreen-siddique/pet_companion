@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:pet_companion/Screens/HomeScreen.dart';
 import 'package:pet_companion/Utils/colorPalete.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rive/rive.dart';
 
 class petSelectionScreen extends StatefulWidget {
   const petSelectionScreen({super.key});
@@ -104,64 +104,70 @@ class _petSelectionScreenState extends State<petSelectionScreen> {
                           });
                           // Navigate to Home Screen or Save Selected Pet
                         },
-                        child: Container(
-                            decoration: BoxDecoration(
-                              color: AppColors.secondaryBackground,
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 8,
-                                  offset: Offset(2, 4),
+                        child:
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.push(context,MaterialPageRoute(builder: (context)=>Homescreen()));
+                          },
+                          child: Container(
+                              decoration: BoxDecoration(
+                                color: AppColors.secondaryBackground,
+                                borderRadius: BorderRadius.circular(20),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 8,
+                                    offset: Offset(2, 4),
+                                  ),
+                                ],
+                              ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Lottie.asset(
+                            pet["animation"]!,
+                              fit: BoxFit.contain,
+                                    // animations: [
+                                    //   selectedPetIndex == index
+                                    //       ? pet["happy"]!   //  play happy animation if selected
+                                    //       : pet["idle"]!    //  otherwise idle
+                                    // ],
+                            ),
                                 ),
+                                SizedBox(height: 10),
+                                Text(
+                                  pet["name"]!,
+                                  style: GoogleFonts.fredoka(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.primaryText,
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 10),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppColors.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      // Select Pet Action
+                                    },
+                                    child: Text(
+                                      "Select",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                )
                               ],
                             ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: Lottie.asset(
-                          pet["animation"]!,
-                            fit: BoxFit.contain,
-                                  // animations: [
-                                  //   selectedPetIndex == index
-                                  //       ? pet["happy"]!   //  play happy animation if selected
-                                  //       : pet["idle"]!    //  otherwise idle
-                                  // ],
-                          ),
-                              ),
-                              SizedBox(height: 10),
-                              Text(
-                                pet["name"]!,
-                                style: GoogleFonts.fredoka(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.primaryText,
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 10),
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: AppColors.primaryColor,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    // Select Pet Action
-                                  },
-                                  child: Text(
-                                    "Select",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
                           ),
                         )
                     );

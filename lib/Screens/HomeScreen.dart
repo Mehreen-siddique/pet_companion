@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
+import 'package:pet_companion/Screens/GamesScreen.dart';
 import 'package:pet_companion/Screens/SleepScreen.dart';
+import 'package:pet_companion/Utils/colorPalete.dart';
 
 
 
@@ -115,14 +117,20 @@ class _HomescreenState extends State<Homescreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            buildLiquidStat(  Colors.teal, Icons.emoji_emotions),
             buildLiquidStat(  Colors.orange, Icons.fastfood),
             InkWell(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Sleepscreen()));
               },
                 child: buildLiquidStat(  Colors.pink.shade200, Icons.bedtime)),
-            buildLiquidStat( Colors.red.shade400, Icons.sports_esports),
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>GameChoiceScreen()));
+              },
+              child: buildLiquidStat( AppColors.primaryColor, Icons.sports_esports,
+
+              ),
+            ),
           ],
         ),
       ),
