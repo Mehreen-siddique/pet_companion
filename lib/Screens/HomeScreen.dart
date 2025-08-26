@@ -7,6 +7,7 @@ import 'package:lottie/lottie.dart';
 import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
 import 'package:pet_companion/Screens/GamesScreen.dart';
 import 'package:pet_companion/Screens/SleepScreen.dart';
+import 'package:pet_companion/Screens/wardrobeScreen.dart';
 import 'package:pet_companion/Utils/colorPalete.dart';
 
 
@@ -117,7 +118,11 @@ class _HomescreenState extends State<Homescreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            buildLiquidStat(  Colors.orange, Icons.fastfood),
+            InkWell(
+              onTap:(){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>AccessoriesScreen()));
+              },
+                child: buildLiquidStat(  Colors.orange, Icons.checkroom)),
             InkWell(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Sleepscreen()));
